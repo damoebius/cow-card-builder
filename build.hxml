@@ -1,0 +1,4 @@
+-cp src
+-cp node_modules/hxnodejs/src
+-main CardBuilder
+-js card-builder.js

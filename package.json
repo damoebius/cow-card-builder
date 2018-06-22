@@ -1,0 +1,31 @@
+{
+  "name": "cow-card-builder",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/damoebius/cow-card-builder.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/damoebius/cow-card-builder/issues"
+  },
+  "dependencies": {
+    "haxe": "5.0.10",
+    "xlsx": "^0.13.0"
+  },
+  "devDependencies": {
+    "hxnodejs": "^4.0.10"
+  },
+  "haxeDependencies": {
+    "haxe": "3.4.7",
+    "haxelib": "3.3.0",
+    "neko": "2.2.0"
+  },
+  "homepage": "https://github.com/damoebius/cow-card-builder#readme"
+}
