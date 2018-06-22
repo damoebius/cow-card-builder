@@ -1,5 +1,6 @@
 package ;
 
+import node.Puppeteer;
 import node.XLSX;
 import js.node.Fs;
 import js.node.http.IncomingMessage;
@@ -40,6 +41,19 @@ class CardBuilder {
     private function buildData():Void{
         var fileBuffer = Fs.readFileSync(FILENAME);
         var workbook = XLSX.read(fileBuffer,{type:"buffer"});
+        Puppeteer.launch().then(
+            function(browser:node.Browser){
+                Node.console.info("browser launched");
+                browser.newPage().then(
+                    function(page:node.Page){
+                        page.addListener("load", function(){
+                            Node.console.info("page loaded");
+                        });
+                        page.goto("http://localhost:4444/card.html");
+                    }
+                );
+            }
+        );
         Node.console.info(workbook.SheetNames[0]);
     }
 

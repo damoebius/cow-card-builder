@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "node card-builder.js build",
+    "load": "node card-builder.js load",
+    "start": "http-server www -c5 -p4444"
   },
   "repository": {
     "type": "git",
@@ -17,6 +19,8 @@
   },
   "dependencies": {
     "haxe": "5.0.10",
+    "puppeteer": "^1.5.0",
+    "http-server": "=0.10.0",
     "xlsx": "^0.13.0"
   },
   "devDependencies": {
