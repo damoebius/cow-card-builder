@@ -6,7 +6,8 @@
   "scripts": {
     "build": "node card-builder.js build",
     "load": "node card-builder.js load",
-    "start": "http-server www -c5 -p4444"
+    "start": "node card-builder.js start",
+    "start:dev": "nodemon --inspect card-builder.js start --ignore www -local --delay 2"
   },
   "repository": {
     "type": "git",
@@ -20,11 +21,17 @@
   "dependencies": {
     "haxe": "5.0.10",
     "puppeteer": "^1.5.0",
-    "http-server": "=0.10.0",
     "xlsx": "^0.13.0"
   },
   "devDependencies": {
-    "hxnodejs": "^4.0.10"
+    "hxnodejs": "^4.0.10",
+    "hxexpress": "^1.0.0",
+    "body-parser": "~1.0.1",
+    "express": "~4.0.0",
+    "mustache": "^2.3.0",
+    "mustache-express": "^1.2.5",
+    "nodemon": "^1.12.1",
+    "taminahx": "^2.0.2"
   },
   "haxeDependencies": {
     "haxe": "3.4.7",

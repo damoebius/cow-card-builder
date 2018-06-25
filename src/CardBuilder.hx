@@ -1,5 +1,11 @@
 package ;
 
+import routes.ApiRouter;
+import middleware.Logger;
+import middleware.Cache;
+import mw.BodyParser;
+import node.mustache.Mustache;
+import node.express.ExpressServer;
 import node.Puppeteer;
 import node.XLSX;
 import js.node.Fs;
@@ -14,26 +20,42 @@ class CardBuilder {
 
     private static var _instance:CardBuilder;
 
+    private var _express:ExpressServer;
+
     public function new() {
-        Node.console.info("Card Builder");
-        var arg = Node.process.argv[2];
-        switch (arg){
-            case "load":
-                loadData();
-            case "build":
-                buildData();
-            default :
-                Node.console.error("missing option : load|build");
+        Logger.info("Card Builder");
+        Node.console.dir(Node.process.argv);
+        if(Node.process.argv.indexOf("load") >= 0){
+            loadData();
+        } else if(Node.process.argv.indexOf("build") >= 0){
+            buildData();
+        } else if(Node.process.argv.indexOf("start") >= 0){
+            startServer();
+        } else {
+            Logger.error("missing option : load|build|start");
         }
 
+    }
 
+    private function startServer():Void{
+        Logger.info("startServer on http://localhost:4444");
+        var mustache = new Mustache();
+        _express = new ExpressServer();
+        _express.use(BodyParser.json());
+        _express.use("/card", cast ApiRouter.getRouter());
+        _express.use("/", ExpressServer.serveStatic(Node.__dirname + '/www'));
+        _express.listen(4444);
+        _express.engine('mustache', mustache);
+        _express.set('view engine', 'mustache');
+        _express.set('views', Node.__dirname + '/www/views');
+        Cache.setCache(mustache.cache);
     }
 
     private function loadData():Void{
         var file = Fs.createWriteStream(FILENAME);
         Https.get(Config.getInstance().cards,function(message:IncomingMessage){
             file.on('finish', function() {
-                Node.console.info("cards.xlsx downloaded");
+                Logger.info("cards.xlsx downloaded");
             });
         });
     }
@@ -43,18 +65,18 @@ class CardBuilder {
         var workbook = XLSX.read(fileBuffer,{type:"buffer"});
         Puppeteer.launch().then(
             function(browser:node.Browser){
-                Node.console.info("browser launched");
+                Logger.info("browser launched");
                 browser.newPage().then(
                     function(page:node.Page){
                         page.addListener("load", function(){
-                            Node.console.info("page loaded");
+                            Logger.info("page loaded");
                         });
                         page.goto("http://localhost:4444/card.html");
                     }
                 );
             }
         );
-        Node.console.info(workbook.SheetNames[0]);
+        Logger.info(workbook.SheetNames[0]);
     }
 
     public static function main(){
