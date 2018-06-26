@@ -14,5 +14,9 @@ typedef ParsingOptions = {
 interface Workbook {
 
     var SheetNames:Array<String>;
+    var Sheets:haxe.DynamicAccess<Sheet>;
+}
+
+interface Sheet {
 
 }

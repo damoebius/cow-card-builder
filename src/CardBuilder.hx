@@ -1,5 +1,6 @@
 package ;
 
+import model.ModelLocator;
 import routes.ApiRouter;
 import middleware.Logger;
 import middleware.Cache;
@@ -28,7 +29,7 @@ class CardBuilder {
         if(Node.process.argv.indexOf("load") >= 0){
             loadData();
         } else if(Node.process.argv.indexOf("build") >= 0){
-            buildData();
+            buildCards();
         } else if(Node.process.argv.indexOf("start") >= 0){
             startServer();
         } else {
@@ -42,13 +43,14 @@ class CardBuilder {
         var mustache = new Mustache();
         _express = new ExpressServer();
         _express.use(BodyParser.json());
-        _express.use("/card", cast ApiRouter.getRouter());
+        _express.use("/langs", cast ApiRouter.getRouter());
         _express.use("/", ExpressServer.serveStatic(Node.__dirname + '/www'));
         _express.listen(4444);
         _express.engine('mustache', mustache);
         _express.set('view engine', 'mustache');
         _express.set('views', Node.__dirname + '/www/views');
         Cache.setCache(mustache.cache);
+        buildData();
     }
 
     private function loadData():Void{
@@ -63,20 +65,11 @@ class CardBuilder {
     private function buildData():Void{
         var fileBuffer = Fs.readFileSync(FILENAME);
         var workbook = XLSX.read(fileBuffer,{type:"buffer"});
-        Puppeteer.launch().then(
-            function(browser:node.Browser){
-                Logger.info("browser launched");
-                browser.newPage().then(
-                    function(page:node.Page){
-                        page.addListener("load", function(){
-                            Logger.info("page loaded");
-                        });
-                        page.goto("http://localhost:4444/card.html");
-                    }
-                );
-            }
-        );
-        Logger.info(workbook.SheetNames[0]);
+        ModelLocator.getInstance().fromWorkbook(workbook);
+    }
+
+    private function buildCards():Void{
+        Logger.info("build cards");
     }
 
     public static function main(){
