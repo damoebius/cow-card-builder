@@ -3,9 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <title>Card</title>
+    <link rel="preload" href="/css/ZillaSlab-Regular.woff2" as="font" type="font/woff2" crossorigin />
+    <link href="/css/mdn.css" rel="stylesheet" type="text/css" />
+    <link href="/css/wiki.css" rel="stylesheet" type="text/css" />
+    <link href="/css/locale-fr.css" rel="stylesheet" type="text/css" />
 </head>
+<style>
+    body {
+        width:744px;
+        height:1039px;
+        border-radius: 25px;
+        border:solid 1px #cccccc;
+    }
+</style>
 <body>
-    mustache power
-    {{card.name.h}}
+    <header id="main-header" class="header-main">
+        <a href="#" class="logo">{{card.name}}</a>
+        <div class="nav-toolbox-wrapper">
+            <div id="toolbox" class="toolbox">
+            </div>
+        </div>
+    </header>
+    <main id="content" role="main">
+
+        <!-- heading -->
+        <div id="wiki-document-head" class="document-head">
+            <div class="center">
+                <!-- action buttons -->
+                <div class="document-actions">
+
+                </div>
+
+                <div class="document-title">
+                    <h1>{{card.name}}</h1>
+                </div>
+            </div>
+        </div>
+
+        <div id="toc" class="toc">
+            <div class="center">
+                <div class="toc-head">Tags :</div>
+                <ol class="toc-links">
+                    {{#card.tags}}
+                        <li><a href="#Constructeur" rel="internal">{{.}}</a></li>
+                    {{/card.tags}}
+
+                </ol>
+            </div>
+        </div>
+
+
+        <div class="center clear">
+
+
+            <div class="wiki-main-content" id="document-main">
+                <div class="center">
+                <!-- start the main content container -->
+                <img src="/images/{{card.image}}">
+                 <div class="note"><p>{{card.description}}</p></div>
+                </div>
+            </div> <!-- ends "main-content" -->
+
+        </div>
+    </main>
 </body>
 </html>
