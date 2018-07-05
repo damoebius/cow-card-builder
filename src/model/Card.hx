@@ -9,6 +9,7 @@ class Card {
     public var description:String;
     public var image:String;
     public var tags:Array<String>;
+    public var costHtml:String;
 
 
     public function new() {

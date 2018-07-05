@@ -15,14 +15,40 @@
         border-radius: 25px;
         border:solid 1px #cccccc;
     }
+    .cost{
+        width:48px;
+    }
+    .cost-anon
+      {
+        background: center / contain  no-repeat url("/images/anon-icon.svg");
+        color:white;
+        font-size:48px;
+        padding:12px
+      }
+
+      .power{
+        padding-top: 17px;
+        margin-left: 10px;
+        background: black;
+        width: 67px;
+        text-align: center;
+        color: white;
+        font-family: x-locale-heading-primary,zillaslab,Palatino,"Palatino Linotype",x-locale-heading-secondary,serif;
+        font-size: 26px;
+      }
+
 </style>
 <body>
     <header id="main-header" class="header-main">
-        <a href="#" class="logo">{{card.name}}</a>
         <div class="nav-toolbox-wrapper">
+            {{#card.att}}
+            <div class="power">{{card.att}}/{{card.def}}</div>
+            {{/card.att}}
             <div id="toolbox" class="toolbox">
+                {{{card.costHtml}}}
             </div>
         </div>
+
     </header>
     <main id="content" role="main">
 
@@ -60,7 +86,7 @@
                 <div class="center">
                 <!-- start the main content container -->
                 <img src="/images/{{card.image}}">
-                 <div class="note"><p>{{card.description}}</p></div>
+                 <div class="note"><p>{{{card.description}}}</p></div>
                 </div>
             </div> <!-- ends "main-content" -->
 
