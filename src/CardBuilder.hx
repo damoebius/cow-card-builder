@@ -55,9 +55,12 @@ class CardBuilder {
 
     private function loadData():Void{
         var file = Fs.createWriteStream(FILENAME);
+        file.on('finish', function() {
+            Logger.info("cards.xlsx downloaded");
+        });
         Https.get(Config.getInstance().cards,function(message:IncomingMessage){
-            file.on('finish', function() {
-                Logger.info("cards.xlsx downloaded");
+            message.on('data',function(data:IncomingMessage){
+                data.pipe(file);
             });
         });
     }
