@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{lang.name}}</title>
+    <link rel="preload" href="/css/ZillaSlab-Regular.woff2" as="font" type="font/woff2" crossorigin />
+    <link href="/css/mdn.css" rel="stylesheet" type="text/css" />
+    <link href="/css/wiki.css" rel="stylesheet" type="text/css" />
+    <link href="/css/locale-fr.css" rel="stylesheet" type="text/css" />
+</head>
+<style>
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+
+th {
+    background-color: #000000;
+    color: white;
+}
+
+.cost{
+        width:48px;
+    }
+    .cost-anon
+      {
+        background: center / contain  no-repeat url("/images/anon-icon.svg");
+        color:white;
+        font-size:48px;
+        padding:12px
+      }
+
+      .power{
+        padding-top: 17px;
+        margin-left: 10px;
+        background: black;
+        width: 67px;
+        text-align: center;
+        color: white;
+        font-family: x-locale-heading-primary,zillaslab,Palatino,"Palatino Linotype",x-locale-heading-secondary,serif;
+        font-size: 26px;
+      }
+</style>
+<body>
+    <table class="bc-table bc-table-web">
+        <thead>
+            <tr >
+                <th>Name</th>
+                <th>Cost</th>
+                <th>Descrition</th>
+                <th>Tags</th>
+                <th>Attack</th>
+                <th>Defence</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#lang.cards}}
+                <tr>
+                    <td><a href="/api/langs/{{lang.id}}/cards/{{id}}">{{name}}</a></td>
+                    <td>{{{costHtml}}}</td>
+                    <td>{{{description}}}</td>
+                    <td>{{tags}}</td>
+                    <td>{{att}}</td>
+                    <td>{{def}}</td>
+                </tr>
+            {{/lang.cards}}
+        </tbody>
+    </table>
+</body>
+</html>

@@ -5,6 +5,7 @@ import js.node.Fs;
 
 class Config {
 
+    public static inline var FILENAME:String="cards.xlsx";
     private static var _instance:Config;
 
     public var cards:String;

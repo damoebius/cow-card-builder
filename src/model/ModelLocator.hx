@@ -50,9 +50,15 @@ class ModelLocator {
                         }
 
                     default :
-                        Logger.error("unknown letter " + letter);
+                        //Logger.error("unknown letter " + letter);
                 }
             }
+            lang.cards = lang.cards.filter(function(n){ return n != null; });
+            lang.cards.shift();
+            for(i in 0...lang.cards.length){
+                lang.cards[i].id = i;
+            }
+            lang.id = i;
         }
     }
 

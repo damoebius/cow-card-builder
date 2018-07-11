@@ -1,40 +1,26 @@
 package ;
 
-import model.ModelLocator;
-import routes.ApiRouter;
-import middleware.Logger;
-import middleware.Cache;
-import mw.BodyParser;
-import node.mustache.Mustache;
-import node.express.ExpressServer;
-import node.Puppeteer;
-import node.XLSX;
-import js.node.Fs;
-import js.node.http.IncomingMessage;
-import js.node.Https;
 import core.Config;
+import js.node.Fs;
 import js.Node;
+import middleware.Cache;
+import middleware.Logger;
+import model.ModelLocator;
+import mw.BodyParser;
+import node.express.ExpressServer;
+import node.mustache.Mustache;
+import node.XLSX;
+import routes.ApiRouter;
 
 class CardBuilder {
-
-    private static inline var FILENAME:String="cards.xlsx";
 
     private static var _instance:CardBuilder;
 
     private var _express:ExpressServer;
 
     public function new() {
-        Logger.info("Card Builder");
-        Node.console.dir(Node.process.argv);
-        if(Node.process.argv.indexOf("load") >= 0){
-            loadData();
-        } else if(Node.process.argv.indexOf("build") >= 0){
-            buildCards();
-        } else if(Node.process.argv.indexOf("start") >= 0){
-            startServer();
-        } else {
-            Logger.error("missing option : load|build|start");
-        }
+        Logger.info("Card Builder Server");
+        startServer();
 
     }
 
@@ -43,7 +29,7 @@ class CardBuilder {
         var mustache = new Mustache();
         _express = new ExpressServer();
         _express.use(BodyParser.json());
-        _express.use("/langs", cast ApiRouter.getRouter());
+        _express.use("/api", cast ApiRouter.getRouter());
         _express.use("/", ExpressServer.serveStatic(Node.__dirname + '/www'));
         _express.listen(4444);
         _express.engine('mustache', mustache);
@@ -53,20 +39,8 @@ class CardBuilder {
         buildData();
     }
 
-    private function loadData():Void{
-        var file = Fs.createWriteStream(FILENAME);
-        file.on('finish', function() {
-            Logger.info("cards.xlsx downloaded");
-        });
-        Https.get(Config.getInstance().cards,function(message:IncomingMessage){
-            message.on('data',function(data:IncomingMessage){
-                data.pipe(file);
-            });
-        });
-    }
-
     private function buildData():Void{
-        var fileBuffer = Fs.readFileSync(FILENAME);
+        var fileBuffer = Fs.readFileSync(Config.FILENAME);
         var workbook = XLSX.read(fileBuffer,{type:"buffer"});
         ModelLocator.getInstance().fromWorkbook(workbook);
     }
