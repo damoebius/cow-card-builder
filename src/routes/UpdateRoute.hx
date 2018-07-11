@@ -18,7 +18,7 @@ class UpdateRoute extends BaseRoute {
 
         router.get(PATH, function(req:Request, res:Response):Void {
 
-            ChildProcess.execSync("wget " + Config.getInstance().cards + " " + Config.FILENAME);
+            ChildProcess.execSync("wget -O " + Config.FILENAME + " " + Config.getInstance().cards);
             res.send("cards.xlsx downloaded");
 
         });
