@@ -59,6 +59,7 @@ th {
                 <th>Tags</th>
                 <th>Attack</th>
                 <th>Defence</th>
+                <th>PNG</th>
             </tr>
         </thead>
         <tbody>
@@ -70,6 +71,11 @@ th {
                     <td>{{tags}}</td>
                     <td>{{att}}</td>
                     <td>{{def}}</td>
+                    <td>
+                        <a href="/build/{{lang.id}}_{{id}}.png" target="_blank">
+                            <img width="50px" src="/build/{{lang.id}}_{{id}}.png">
+                        </a>
+                    </td>
                 </tr>
             {{/lang.cards}}
         </tbody>

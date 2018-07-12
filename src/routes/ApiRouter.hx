@@ -9,7 +9,7 @@ class ApiRouter {
         new CardRoute().init(router);
         new LangRoute().init(router);
         new UpdateRoute().init(router);
-        new BuildRoute().init(router);
+        new RenderRoute().init(router);
         return router;
     }
 }

@@ -7,9 +7,9 @@ import model.Card;
 import model.ModelLocator;
 import node.Puppeteer;
 
-class BuildRoute extends BaseRoute {
+class RenderRoute extends BaseRoute {
 
-    private static inline var PATH:String = "/build";
+    private static inline var PATH:String = "/render";
 
     private var _cards:Array<Card>;
 
