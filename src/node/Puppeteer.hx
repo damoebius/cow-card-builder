@@ -14,8 +14,19 @@ interface Browser {
 
 interface Page extends IEventEmitter {
     public function goto(url:String):Promise<Response>;
+    public function screenshot(?options:ScreenshotOptions):Promise<String>;
+    public function setViewport(viewport:Viewport):Promise<String>;
 }
 
 interface Response {
 
+}
+
+typedef ScreenshotOptions = {
+    var path:String;
+}
+
+typedef Viewport = {
+    var width :Int;
+    var height :Int;
 }

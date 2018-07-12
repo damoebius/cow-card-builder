@@ -45,10 +45,6 @@ class CardBuilder {
         ModelLocator.getInstance().fromWorkbook(workbook);
     }
 
-    private function buildCards():Void{
-        Logger.info("build cards");
-    }
-
     public static function main(){
         _instance = new CardBuilder();
     }

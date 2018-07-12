@@ -27,14 +27,15 @@ th {
 }
 
 .cost{
-        width:48px;
+        width:25px;
     }
     .cost-anon
       {
         background: center / contain  no-repeat url("/images/anon-icon.svg");
         color:white;
-        font-size:48px;
-        padding:12px
+        font-size:18px;
+        padding:7px;
+        vertical-align:top;
       }
 
       .power{
@@ -64,7 +65,7 @@ th {
             {{#lang.cards}}
                 <tr>
                     <td><a href="/api/langs/{{lang.id}}/cards/{{id}}">{{name}}</a></td>
-                    <td>{{{costHtml}}}</td>
+                    <td width="105px">{{{costHtml}}}</td>
                     <td>{{{description}}}</td>
                     <td>{{tags}}</td>
                     <td>{{att}}</td>

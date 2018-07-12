@@ -2,6 +2,7 @@ package model;
 class Card {
 
     public var id:Int;
+    public var langId:Int;
     public var name:String;
     public var cost:String;
     public var type:String;

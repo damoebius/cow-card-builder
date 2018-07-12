@@ -7,3 +7,6 @@ Image resolution: Minimum 300 dpi
 
 
 Bleeding: Please allow 1/8" (approx 36 pixels based on a 300dpi image) for bleeding and a further 1/8" for safe area margin inside each side
+
+http://vps.tamina-online.com:4444/api/langs/1/cards/3
+http://vps.tamina-online.com:4444/api/update

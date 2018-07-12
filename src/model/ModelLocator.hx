@@ -29,6 +29,7 @@ class ModelLocator {
                     lang.cards[index] = new Card();
                 }
                 var card = lang.cards[index];
+                card.langId = i;
                 switch(letter){
                     case 'A':
                         card.name = Reflect.field(sheet, field).h;
