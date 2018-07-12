@@ -5,7 +5,7 @@ import js.Promise;
 
 @:jsRequire("puppeteer")
 extern class Puppeteer {
-    public static function launch():Promise<Browser>;
+    public static function launch(?options:LaunchOptions):Promise<Browser>;
 }
 
 interface Browser {
@@ -29,4 +29,8 @@ typedef ScreenshotOptions = {
 typedef Viewport = {
     var width :Int;
     var height :Int;
+}
+
+typedef LaunchOptions = {
+    var args:Array<String>;
 }
