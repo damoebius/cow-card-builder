@@ -49,15 +49,19 @@ class ModelLocator {
                             card.description = StringTools.htmlUnescape(card.description).split("&apos;").join("'");
                             card.description = getHtmlText(card.description);
                         }
-
+                    case 'G':
+                        card.image = Reflect.field(sheet, field).h ;
+                        if(card.image.indexOf("http")== -1){
+                            card.image = "/images/" + card.image;
+                        }
                     default :
                         //Logger.error("unknown letter " + letter);
                 }
             }
             lang.cards = lang.cards.filter(function(n){ return n != null; });
             lang.cards.shift();
-            for(i in 0...lang.cards.length){
-                lang.cards[i].id = i;
+            for(j in 0...lang.cards.length){
+                lang.cards[j].id = j;
             }
             lang.id = i;
         }

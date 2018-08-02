@@ -20,7 +20,9 @@ class CardRoute extends BaseRoute {
             var langId = Std.parseInt(req.param("langId"));
             var cardId = Std.parseInt(req.param("cardId"));
             Cache.instance.reset();
-            res.render('card', { card: ModelLocator.getInstance().langs[langId].cards[cardId] });
+            var card = ModelLocator.getInstance().langs[langId].cards[cardId];
+            res.render('card', { card: card });
+
         });
 
     }

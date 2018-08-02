@@ -15,6 +15,6 @@ class Card {
 
 
     public function new() {
-        image = "repeat.jpg";
+        image = "";
     }
 }
