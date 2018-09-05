@@ -12,12 +12,11 @@
     body {
         width:816px;
         height:1110px;
-        margin: 35px 35px 35px 35px;
     }
     .main {
         width:744px;
         height:1040px;
-
+        padding: 0px 0px 0px 35px;
     }
     .cost{
         width:48px;
@@ -49,9 +48,15 @@
         font-size: 26px;
       }
 
+      .headm {
+        width: 744px;
+        padding-top: 35px;
+        margin-left:10px;
+      }
+
 </style>
 <body>
-    <header id="main-header" class="header-main">
+    <header id="main-header" class="header-main headm">
         <div class="nav-toolbox-wrapper">
             {{#card.att}}
             <div class="power">{{card.att}}/{{card.def}}</div>
