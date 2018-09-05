@@ -30,7 +30,7 @@ class RenderRoute extends BaseRoute {
             res.write("Rendering all cards");
             Puppeteer.launch({args:["--no-sandbox","--disable-setuid-sandbox"]}).then(function(browser:Browser) {
                 browser.newPage().then(function(page:Page) {
-                    page.setViewport({width:744, height:1039}).then(function(result:String) {
+                    page.setViewport({width:816, height:1110}).then(function(result:String) {
                         render(res, page, _cards.pop());
                     });
                 });
