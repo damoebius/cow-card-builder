@@ -1,7 +1,5 @@
 package ;
 
-import core.Config;
-import js.node.Fs;
 import js.Node;
 import middleware.Cache;
 import middleware.Logger;
@@ -9,7 +7,6 @@ import model.ModelLocator;
 import mw.BodyParser;
 import node.express.ExpressServer;
 import node.mustache.Mustache;
-import node.XLSX;
 import routes.ApiRouter;
 
 class CardBuilder {
@@ -36,14 +33,9 @@ class CardBuilder {
         _express.set('view engine', 'mustache');
         _express.set('views', Node.__dirname + '/www/views');
         Cache.setCache(mustache.cache);
-        buildData();
+        ModelLocator.getInstance().update();
     }
 
-    private function buildData():Void{
-        var fileBuffer = Fs.readFileSync(Config.FILENAME);
-        var workbook = XLSX.read(fileBuffer,{type:"buffer"});
-        ModelLocator.getInstance().fromWorkbook(workbook);
-    }
 
     public static function main(){
         _instance = new CardBuilder();

@@ -1,8 +1,8 @@
 package model;
 
-import middleware.Logger;
-import js.Node;
-import node.XLSX.Workbook;
+import core.Config;
+import js.node.Fs;
+import node.XLSX;
 
 class ModelLocator {
 
@@ -12,6 +12,12 @@ class ModelLocator {
 
     private function new() {
         langs = [];
+    }
+
+    public function update():Void{
+        var fileBuffer = Fs.readFileSync(Config.FILENAME);
+        var workbook = XLSX.read(fileBuffer,{type:"buffer"});
+        fromWorkbook(workbook);
     }
 
     public function fromWorkbook(workbook:Workbook):Void {
